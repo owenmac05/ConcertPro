@@ -1,0 +1,78 @@
+(c) Copyright IBM Corporation 1993,2007
+Command Line Processor for DB2 Client 11.5.9.0
+
+You can issue database manager commands and SQL statements from the command 
+prompt. For example:
+    db2 => connect to sample
+    db2 => bind sample.bnd
+
+For general help, type: ?.
+For command help, type: ? command, where command can be
+the first few keywords of a database manager command. For example:
+ ? CATALOG DATABASE for help on the CATALOG DATABASE command
+ ? CATALOG          for help on all of the CATALOG commands.
+
+To exit db2 interactive mode, type QUIT at the command prompt. Outside 
+interactive mode, all commands must be prefixed with 'db2'.
+To list the current command option settings, type LIST COMMAND OPTIONS.
+
+For more detailed help, refer to the Online Reference Manual.
+
+db2 => db2 => db2 => db2 => db2 => CONNECT TO COMP421
+
+   Database Connection Information
+
+ Database server        = X
+ SQL authorization ID   = X
+ Local database alias   = X
+
+
+db2 => db2 => db2 => db2 => db2 => db2 => db2 => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => CREATE TABLE Users ( emailAddress VARCHAR(30) NOT NULL, password VARCHAR(30) NOT NULL, PRIMARY KEY(emailAddress) )
+DB20000I  The SQL command completed successfully.
+
+db2 => db2 => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => CREATE TABLE RegularUser ( emailAddress VARCHAR(30) NOT NULL, PRIMARY KEY (emailAddress), FOREIGN KEY (emailAddress) REFERENCES Users(emailAddress) )
+DB20000I  The SQL command completed successfully.
+
+db2 => db2 => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => CREATE TABLE Admin ( emailAddress VARCHAR(30) NOT NULL, PRIMARY KEY (emailAddress), FOREIGN KEY (emailAddress) REFERENCES Users(emailAddress) )
+DB20000I  The SQL command completed successfully.
+
+db2 => db2 => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => CREATE TABLE Genre ( genreName VARCHAR(52) NOT NULL, PRIMARY KEY (genreName) )
+DB20000I  The SQL command completed successfully.
+
+db2 => db2 => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => CREATE TABLE favourite_genre ( emailAddress VARCHAR(30) NOT NULL, genreName VARCHAR(52) NOT NULL, PRIMARY KEY (emailAddress, genreName), FOREIGN KEY (emailAddress) REFERENCES Users(emailAddress), FOREIGN KEY (genreName) REFERENCES Genre(genreName) )
+DB20000I  The SQL command completed successfully.
+
+db2 => db2 => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => CREATE TABLE Artist ( artistId INTEGER NOT NULL, name VARCHAR(30) NOT NULL, PRIMARY KEY (artistId) )
+DB20000I  The SQL command completed successfully.
+
+db2 => db2 => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => CREATE TABLE favourite_artist ( emailAddress VARCHAR(30) NOT NULL, artistId INTEGER NOT NULL, PRIMARY KEY (emailAddress, artistId), FOREIGN KEY (emailAddress) REFERENCES Users(emailAddress), FOREIGN KEY (artistId) REFERENCES Artist(artistId) )
+DB20000I  The SQL command completed successfully.
+
+db2 => db2 => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => CREATE TABLE artist_genre ( genreName VARCHAR(52) NOT NULL, artistId INTEGER NOT NULL, PRIMARY KEY (genreName, artistId), FOREIGN KEY (genreName) REFERENCES Genre(genreName), FOREIGN KEY (artistId) REFERENCES Artist(artistId) )
+DB20000I  The SQL command completed successfully.
+
+db2 => db2 => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => CREATE TABLE Venue ( address VARCHAR(255) NOT NULL, venueName VARCHAR(30) NOT NULL, capacity INTEGER NOT NULL, PRIMARY KEY (address) )
+DB20000I  The SQL command completed successfully.
+
+db2 => db2 => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => CREATE TABLE venues_near_me ( emailAddress VARCHAR(30) NOT NULL, address VARCHAR(255) NOT NULL, PRIMARY KEY (emailAddress, address), FOREIGN KEY (emailAddress) REFERENCES Users(emailAddress), FOREIGN KEY (address) REFERENCES Venue(address) )
+DB20000I  The SQL command completed successfully.
+
+db2 => db2 => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => CREATE TABLE venue_genre ( address VARCHAR(255) NOT NULL, genreName VARCHAR(52) NOT NULL, PRIMARY KEY (address, genreName), FOREIGN KEY (address) REFERENCES Venue(address), FOREIGN KEY (genreName) REFERENCES Genre(genreName) )
+DB20000I  The SQL command completed successfully.
+
+db2 => db2 => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => CREATE TABLE concert ( artistId INTEGER NOT NULL, address VARCHAR(255) NOT NULL, concertDate DATE NOT NULL, PRIMARY KEY (artistId, address, concertDate), FOREIGN KEY (artistId) REFERENCES Artist(artistId), FOREIGN KEY (address) REFERENCES Venue(address) )
+DB20000I  The SQL command completed successfully.
+
+db2 => db2 => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => CREATE TABLE Tickets ( artistId INTEGER NOT NULL, address VARCHAR(255) NOT NULL, concertDate DATE NOT NULL, section VARCHAR(20) NOT NULL, seatNumber INTEGER NOT NULL, price DECIMAL(10,2) NOT NULL, PRIMARY KEY (artistId, address, concertDate, section, seatNumber), FOREIGN KEY (artistId, address, concertDate) REFERENCES concert(artistId, address, concertDate) )
+DB20000I  The SQL command completed successfully.
+
+db2 => db2 => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => CREATE TABLE online_purchase ( artistId INTEGER NOT NULL, address VARCHAR(255) NOT NULL, concertDate DATE NOT NULL, section VARCHAR(20) NOT NULL, seatNumber INTEGER NOT NULL, emailAddress VARCHAR(30) NOT NULL, PRIMARY KEY (artistId, address, concertDate, section, seatNumber), FOREIGN KEY (artistId, address, concertDate, section, seatNumber) REFERENCES Tickets(artistId, address, concertDate, section, seatNumber), FOREIGN KEY (emailAddress) REFERENCES RegularUser(emailAddress) )
+DB20000I  The SQL command completed successfully.
+
+db2 => db2 => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => CREATE TABLE in_person_purchase ( artistId INTEGER NOT NULL, address VARCHAR(255) NOT NULL, concertDate DATE NOT NULL, section VARCHAR(20) NOT NULL, seatNumber INTEGER NOT NULL, emailAddress VARCHAR(30) NOT NULL, PRIMARY KEY (artistId, address, concertDate, section, seatNumber), FOREIGN KEY (artistId, address, concertDate, section, seatNumber) REFERENCES Tickets(artistId, address, concertDate, section, seatNumber), FOREIGN KEY (emailAddress) REFERENCES Admin(emailAddress) )
+DB20000I  The SQL command completed successfully.
+
+db2 => db2 => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => CREATE TABLE scan ( artistId INTEGER NOT NULL, address VARCHAR(255) NOT NULL, concertDate DATE NOT NULL, section VARCHAR(20) NOT NULL, seatNumber INTEGER NOT NULL, emailAddress VARCHAR(30) NOT NULL, PRIMARY KEY (artistId, address, concertDate, section, seatNumber), FOREIGN KEY (artistId, address, concertDate, section, seatNumber) REFERENCES Tickets(artistId, address, concertDate, section, seatNumber), FOREIGN KEY (emailAddress) REFERENCES Admin(emailAddress) )
+DB20000I  The SQL command completed successfully.
+
+db2 => 
