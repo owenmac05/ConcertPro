@@ -58,7 +58,7 @@ To run it against your own Db2 instance (steps not tested outside the course set
 
 1. Run [createtbl.sql](<part 2/createtbl.sql>), then [loaddata.sql](<part 2/loaddata.sql>).
 2. Set the SOCSUSER and SOCSPASSWD environment variables.
-3. Update the connection URL in [ConcertPro.java](<part 2/ConcertPro.java>) and put the Db2 JDBC driver on the classpath.
+3. Update the connection URL in [ConcertPro.java](<part 3/ConcertPro.java>) and put the Db2 JDBC driver on the classpath.
 4. Compile and run ConcertPro.
 
 ## Documentation (reports)
